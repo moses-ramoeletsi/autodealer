@@ -45,8 +45,9 @@ const Header: React.FC = () => {
           
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            <NavLink to="/" label="Home" currentPath={location.pathname} onClick={closeMenu} />
-            <NavLink to="/cars" label="Cars" currentPath={location.pathname} onClick={closeMenu} />
+          {!isAuthenticated && (
+              <NavLink to="/" label="Home" currentPath={location.pathname} onClick={closeMenu} />
+            )}            <NavLink to="/cars" label="Cars" currentPath={location.pathname} onClick={closeMenu} />
             <NavLink to="/about" label="About" currentPath={location.pathname} onClick={closeMenu} />
             <NavLink to="/contact" label="Contact" currentPath={location.pathname} onClick={closeMenu} />
           </nav>
@@ -56,7 +57,7 @@ const Header: React.FC = () => {
             {isAuthenticated ? (
               <div className="flex items-center space-x-4">
                 <Link
-                  to={user?.role === 'dealer' ? '/dealer-dashboard' : '/dashboard'}
+                  to="/dashboard"
                   className="text-sm font-medium text-foreground hover:text-primary transition-colors"
                 >
                   Dashboard
@@ -118,15 +119,18 @@ const Header: React.FC = () => {
         {isMenuOpen && (
           <div className="md:hidden pt-4 pb-2 animate-fade-in">
             <nav className="flex flex-col space-y-4">
+            {!isAuthenticated && (
               <NavLink to="/" label="Home" currentPath={location.pathname} onClick={closeMenu} />
-              <NavLink to="/cars" label="Cars" currentPath={location.pathname} onClick={closeMenu} />
+            )}              
+            
+            <NavLink to="/cars" label="Cars" currentPath={location.pathname} onClick={closeMenu} />
               <NavLink to="/about" label="About" currentPath={location.pathname} onClick={closeMenu} />
               <NavLink to="/contact" label="Contact" currentPath={location.pathname} onClick={closeMenu} />
               
               {isAuthenticated ? (
                 <>
                   <Link
-                    to={user?.role === 'dealer' ? '/dealer-dashboard' : '/dashboard'}
+                    to="/dashboard"
                     className="text-base font-medium text-foreground hover:text-primary transition-colors"
                     onClick={closeMenu}
                   >

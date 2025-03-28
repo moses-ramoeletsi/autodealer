@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
@@ -17,7 +16,7 @@ const CustomerDashboard: React.FC = () => {
   const favoriteCars = favorites.map(fav => {
     return cars.find(car => car.id === fav.carId);
   }).filter(Boolean);
-  
+    
   const isLoading = inquiryLoading || carsLoading;
   
   if (isLoading) {
